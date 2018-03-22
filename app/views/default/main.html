@@ -1,0 +1,108 @@
+<x-view>
+    <x-sidebar>
+        <x-sidebar-separator>Start</x-sidebar-separator>
+        <x-sidebar-item id='sidebar-build' data-has-tooltip>
+            <i class="material-icons">build</i>
+            <x-tooltip class='right middle'>
+                Build
+            </x-tooltip>
+        </x-sidebar-item>
+        <x-sidebar-item id='sidebar-maps' data-has-tooltip>
+            <i class="material-icons">map</i>
+            <x-tooltip class='right middle'>
+                Maps
+            </x-tooltip>
+        </x-sidebar-item>
+        <x-sidebar-item data-has-tooltip>
+            <i class="material-icons">explore</i>
+            <x-tooltip class='right middle'>
+                Explore
+            </x-tooltip>
+        </x-sidebar-item>
+        <x-sidebar-separator>Groups</x-sidebar-separator>
+        <x-sidebar-item data-has-tooltip>
+            <i class="material-icons">search</i>
+            <x-tooltip class='right middle'>
+                Search
+            </x-tooltip>
+        </x-sidebar-item>
+        <x-sidebar-item data-has-tooltip>
+            <i class="material-icons">my_location</i>
+            <x-tooltip class='right middle'>
+                My location
+            </x-tooltip>
+        </x-sidebar-item>
+    </x-sidebar>
+    <x-content>
+
+    </x-content>
+<x-view>
+
+<script>
+    var layout = this;
+    var sidebar = layout.one('x-sidebar');
+    var content = layout.one('x-content');
+    layout.on('after.eval', function(event){
+        doc.one('#sidebar-build').on('click', function(event){
+            content.open( './app/views/default/_content_search.html' );
+        });
+        doc.one('#sidebar-maps').on('click', function(event){
+            app.layouts.open( './app/views/maps/main.html' );
+        })
+    })
+</script>
+
+<style>
+    x-content{
+        display: block;
+        width: calc( 100% - 100px );
+        height: 100%;
+
+        float: right;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+    x-sidebar{
+        display: flex;
+        box-sizing: border-box;
+        width: 100px;
+        height: 100%;
+        background-color: #222;
+        padding: 10px 0;
+        justify-content: start;
+        flex-direction: column;
+        align-items: center;
+        float: left;
+    }
+    x-sidebar-item{
+        width: 50px;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        color: #777;
+        border-radius: 100%;
+        cursor: pointer;
+        position: relative;
+    }
+
+    x-sidebar-separator{
+        color: #777;
+        width: 70px;
+        border-bottom: 1px solid #777;
+        height: 25px;
+        text-align: center;
+        line-height: 25px;
+        margin-bottom: 5px;
+    }
+
+    x-sidebar-item:hover,
+    x-sidebar-item:active,
+    x-sidebar-item[show]{
+        color: #f2f2f2;
+        background-color: #333;
+    }
+
+
+</style>

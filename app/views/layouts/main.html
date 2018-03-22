@@ -1,0 +1,39 @@
+
+
+<html>
+    <head>
+        <base href="../../../" target="_blank">
+        <link href="./app/assets/style/main.css" rel="stylesheet"/>
+        <script src="./app/modules/ext/dom.js" type="text/javascript"></script>
+        <script src="./app/modules/ext/customelements.js" type="text/javascript"></script>
+        <script src="./app/assets/script/main.js" type="text/javascript"></script>
+    </head>
+    <body>
+        <x-app>
+            <x-layouts>
+
+            </x-layouts>
+        </x-app>
+        <script>
+            let remote = require('electron').remote;
+            let currentWindow = remote.getCurrentWindow();
+
+            let app = {
+                main: null,
+                layouts: null
+            };
+
+            document.addEventListener('DOMContentLoaded', function(event){
+                console.log('before show');
+                currentWindow.show();
+                currentWindow.splash.hide();
+                console.log('after show');
+
+                app.main = doc.one('x-app');
+                app.layouts = doc.one('x-layouts');
+
+                app.layouts.open( './app/views/default/main.html' );
+            });
+        </script>
+    </body>
+</html>

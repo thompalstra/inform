@@ -1,0 +1,238 @@
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+html, body{
+    font-family: "Roboto";
+}
+
+x-layout{
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+
+    transform: scale( .95 );
+    opacity: 0;
+    visibility: visible;
+    pointer-events: none;
+
+    background-color: #ddd;
+
+    overflow: auto;
+}
+
+
+x-layout[data-showing]{
+    animation: LayoutShowingAnimation 500ms forwards;
+}
+x-layout[data-show]{
+    transform: scale( 1 );
+    opacity: 1;
+    visibility: visible;
+    pointer-events: all;
+}
+x-layout[data-dismissing]{
+    animation: LayoutDismissingAnimation 500ms forwards;
+}
+
+@keyframes LayoutShowingAnimation{
+    0% {
+        transform: scale( .95 );
+        opacity: 0;
+        visibility: visible;
+        pointer-events: none;
+    } 100% {
+        transform: scale( 1 );
+        opacity: 1;
+        visibility: visible;
+        pointer-events: none;
+    }
+}
+@keyframes LayoutDismissingAnimation{
+    0% {
+        transform: scale( 1 );
+        opacity: 1;
+        visibility: visible;
+        pointer-events: none;
+    } 100% {
+        transform: scale( .95 );
+        opacity: 0;
+        visibility: visible;
+        pointer-events: none;
+    }
+}
+
+x-tooltip{
+    position: absolute;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    white-space: nowrap;
+
+    background-color: #111;
+    color: #f2f2f2;
+    padding: 5px 10px;
+    border-radius: 10px;
+
+    -webkit-transition-property: opacity; /* Safari */
+    -webkit-transition-duration: .3s; /* Safari */
+    -webkit-transition-delay: 1s; /* Safari */
+    transition-property: opacity;
+    transition-duration: .3s;
+    transition-delay: 1s;
+}
+
+x-tooltip.right{
+    left: 100%;
+    margin-left: 10px;
+}
+x-tooltip.left{
+    right: 100%;
+    margin-right: 10px;
+}
+x-tooltip.top{
+    bottom: 100%;
+    margin-bottom: 10px;
+}
+x-tooltip.bottom{
+    top: 100%;
+    margin-top: 10px;
+}
+
+x-tooltip.middle{
+    top: 50%;
+    transform: translateY( -50% );
+}
+x-tooltip.center{
+    left: 50%;
+    transform: translateX( -50% );
+}
+
+[data-has-tooltip]:hover x-tooltip{
+    opacity: 1;
+    visibility: visible;
+    pointer-events: all;
+}
+
+x-menu{
+    height: 70px;
+    display: block;
+}
+x-menu-item{
+    height: 50px;
+    width: 50px;
+    display: block;
+}
+
+.pull-left{
+    float: left;
+}
+.pull-right{
+    float: right;
+}
+
+
+.btn{
+    height: 50px;
+    width: 50px;
+
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+.btn.large{
+    height: 75px;
+    width: 75px;
+}
+.btn.small{
+    height: 25px;
+    width: 25px;
+}
+.btn.bordered{
+    border-width: 2px;
+    border-style: dotted;
+}
+.btn.rounded{
+    border-radius: 25%;
+}
+.btn.round{
+    border-radius: 100%;
+}
+
+.btn.dark{
+
+}
+.btn-light{
+    color: #777;
+    border-color: #777;
+}
+
+.btn-light:hover{
+    color: white;
+    border-color: white;
+}
+
+.btn.transparent{
+    background-color: transparent;
+}
+
+
+
+
+.column{
+    height: 100%;
+    display: block;
+    float: left;
+}
+
+.column.dark{
+    background-color: #111;
+}
+
+.left-w12{ margin-left: 100%;}
+.w12{ width: 100%;}
+.right-w12{ margin-right: 100%;}
+
+.left-w11{ margin-left: 91.666667% }
+.w11{ width: 91.666667% }
+.right-w11{ margin-right: 91.666667% }
+
+.left-w10{ margin-left: 83.333333% }
+.w10{ width: 83.333333% }
+.right-w10{ margin-right: 83.333333% }
+
+.left-w9{ margin-left: 75% }
+.w9{ width: 75% }
+.right-w9{ margin-right: 75% }
+
+.left-w8{ margin-left: 66.666667% }
+.w8{ width: 66.666667% }
+.right-w8{ margin-right: 66.666667% }
+
+.left-w7{ margin-left: 58.333333% }
+.w7{ width: 58.333333% }
+.right-w7{ margin-right: 58.333333% }
+
+.left-w6{ margin-left: 50% }
+.w6{ width: 50% }
+.right-w6{ margin-right: 50% }
+
+.left-w5{ margin-left: 41.666667% }
+.w5{ width: 41.666667% }
+.right-w5{ margin-right: 41.666667% }
+
+.left-w4{ margin-left: 33.333334% }
+.w4{ width: 33.333334% }
+.right-w4{ margin-right: 33.333334% }
+
+.left-w3{ margin-left: 25% }
+.w3{ width: 25% }
+.right-w3{ margin-right: 25% }
+
+.left-w2{ margin-left: 16.666667% }
+.w2{ width: 16.666667% }
+.right-w2{ margin-right: 16.666667% }
+
+.left-w1{ margin-left: 8.333333% }
+.w1{ width: 8.333333% }
+.left-w1{ margin-right: 8.333333% }
