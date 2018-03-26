@@ -1,13 +1,13 @@
 <x-view>
     <x-sidebar>
         <x-sidebar-separator>Start</x-sidebar-separator>
-        <x-sidebar-item id='sidebar-build' data-has-tooltip>
+        <x-sidebar-item id='sidebar-build' data-has-tooltip data-content-url='./app/views/default/_content_search.html'>
             <i class="material-icons">build</i>
             <x-tooltip class='right middle'>
                 Build
             </x-tooltip>
         </x-sidebar-item>
-        <x-sidebar-item id='sidebar-maps' data-has-tooltip>
+        <x-sidebar-item id='sidebar-maps' data-has-tooltip data-content-url='./app/views/default/_content_maps.html'>
             <i class="material-icons">map</i>
             <x-tooltip class='right middle'>
                 Maps
@@ -33,21 +33,23 @@
             </x-tooltip>
         </x-sidebar-item>
     </x-sidebar>
-    <x-content>
-
-    </x-content>
+    <x-content data-eval-js></x-content>
 <x-view>
 
 <script>
     var layout = this;
     var sidebar = layout.one('x-sidebar');
     var content = layout.one('x-content');
-    layout.on('after.eval', function(event){
-        doc.one('#sidebar-build').on('click', function(event){
-            content.open( './app/views/default/_content_search.html' );
-        });
-        doc.one('#sidebar-maps').on('click', function(event){
-            app.layouts.open( './app/views/maps/main.html' );
+    this.on('after.eval', function(event){
+
+        this.find('x-sidebar-item').on('click', function(event){
+            if( !content.opening ){
+                this.siblings().forEach(function(el){
+                    el.removeAttribute('show')
+                });
+                this.setAttribute('show', '');
+                content.open( this.getAttribute('data-content-url') );
+            }
         })
     })
 </script>
@@ -55,11 +57,13 @@
 <style>
     x-content{
         display: block;
-        width: calc( 100% - 100px );
+        width: 100%;
         height: 100%;
 
+        position: relative;
+
         float: right;
-        padding: 20px;
+        /* padding: 20px; */
         box-sizing: border-box;
     }
     x-sidebar{
@@ -74,6 +78,14 @@
         align-items: center;
         float: left;
     }
+
+    x-sidebar + x-content{
+        width: calc( 100% - 100px );
+    }
+    x-menu + x-content{
+        height: calc( 100% - 70px );
+    }
+
     x-sidebar-item{
         width: 50px;
         height: 50px;
@@ -85,6 +97,7 @@
         border-radius: 100%;
         cursor: pointer;
         position: relative;
+        margin: 0 0 5px 0;
     }
 
     x-sidebar-separator{
@@ -102,6 +115,18 @@
     x-sidebar-item[show]{
         color: #f2f2f2;
         background-color: #333;
+    }
+
+    x-sidebar-item[show]:after{
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 100%;
+        transform: translate(-50%, -50%);
+        height: 15px;
+        width: 15px;
+        border-radius: 100%;
+        background-color: #009688;
     }
 
 

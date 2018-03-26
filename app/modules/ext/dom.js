@@ -116,10 +116,10 @@ extend( HTMLElement, Document ).with({
                 this.addEventListener( eventType, function( originalEvent ){
                     if( originalEvent.target.matches( b ) ){
                         c.call( originalEvent.target, originalEvent );
-                        console.log(originalEvent.defaultPrevented);
+                        // console.log(originalEvent.defaultPrevented);
                     } else if( d === true && ( closest = originalEvent.target.closest( b ) ) ){
                         c.call( closest, originalEvent );
-                        console.log(originalEvent.defaultPrevented);
+                        // console.log(originalEvent.defaultPrevented);
                     }
                 } );
             } else {
@@ -145,7 +145,9 @@ extend( HTMLElement ).with({
         }
 
         obj.onsuccess = function( xhr ){
-            this.innerHTML = xhr.response.head.innerHTML + xhr.response.body.innerHTML;
+            if( xhr.statusText.length > 0 ){
+                this.innerHTML = xhr.response.head.innerHTML + xhr.response.body.innerHTML;
+            }
             if( typeof this.dataset.evalJs === 'string' ){
                 this.do('before.eval');
                 this.querySelectorAll('script').forEach(function(script){
@@ -154,10 +156,36 @@ extend( HTMLElement ).with({
                 this.do('after.eval');
                 obj.onaftersuccess.call( this, xhr );
             }
+
         }.bind(this);
         send( obj );
+    },
+    siblings: function( includeSelf ){
+        if( typeof includeSelf == 'undefined' ){
+            includeSelf = false;
+        }
+
+        var collection = new HTMLElementCollection();
+        for( var i = 0; i < this.parentNode.children.length; i++ ){
+            if( this.parentNode.children[i] == this && includeSelf == true ){
+                collection.appendChild( this.parentNode.children[i] );
+            } else {
+                collection.appendChild( this.parentNode.children[i] );
+            }
+        }
+        return collection;
     }
 })
+
+class HTMLElementCollection{
+    constructor(){
+        this.length = 0;
+    }
+    appendChild( el ){
+        this[ this.length++ ] = el;
+    }
+}
+
 extend( Document ).with({
     create: function( tag, params ){
         var element = document.createElement( tag );
@@ -174,7 +202,7 @@ extend( Document ).with({
     }
 });
 
-extend( HTMLFormControlsCollection, NodeList ).with({
+extend( HTMLFormControlsCollection, NodeList, HTMLElementCollection ).with({
     on: function(){
         this.delegate( 'on', arguments );
     },
@@ -189,7 +217,7 @@ extend( HTMLFormControlsCollection, NodeList ).with({
     }
 })
 
-extend( HTMLFormControlsCollection ).with({
+extend( HTMLFormControlsCollection, HTMLElementCollection  ).with({
     forEach: function( callback ){
         for( var i = 0; i < this.length; i++ ){
             callback.call( this, this[i] );

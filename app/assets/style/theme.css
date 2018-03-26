@@ -1,0 +1,93 @@
+:root{
+    --colors-turqoise: #009688;
+    --colors-turqoise-reactive: #00A899;
+    --colors-light: #c3c3c3;
+    --colors-light-reactive: #d9d9d9;
+    --colors-lighter: #d8d8d8;
+    --colors-lighter-reactive: #e8e8e8;
+    --colors-lightest: white;
+    --colors-lightest-reactive: white;
+
+    --ds-ds1: 0px 2px 10px 1px rgba(0,0,0,0.5);
+    --ds-ds1-reactive: 0px 2px 10px 1px rgba(0,0,0,0.7);
+}
+
+[ds="ds1"]{
+    -webkit-box-shadow: var(--ds-ds1);
+}
+[ds="ds1-reactive"]{
+    -webkit-box-shadow: none;
+}
+[ds="ds1-reactive"]:hover,
+[ds="ds1-reactive"]:active{
+    -webkit-box-shadow: var(--ds-ds1-reactive);
+}
+
+[fg="turqoise"]{
+    color: var(--colors-turqoise);
+}
+[bg="turqoise"]{
+    background-color: var(--colors-turqoise);
+}
+
+[fg="turqoise-reactive"]{
+    color: var(--colors-turqoise);
+}
+[fg="turqoise-reactive"]:hover,
+[fg="turqoise-reactive"]:active{
+    color: var(--colors-turqoise-reactive);
+}
+
+[bg="turqoise-reactive"]{
+    background-color: var(--colors-turqoise);
+}
+[bg="turqoise-reactive"]:hover,
+[bg="turqoise-reactive"]:active{
+    background-color: var(--colors-turqoise-reactive);
+}
+
+[fg="lightest"]{
+    color: var(--colors-lightest);
+}
+[bg="lightest"]{
+    background-color: var(--colors-lightest);
+}
+
+[fg="lightest-reactive"]{
+    color: var(--colors-lightest);
+}
+[fg="lightest-reactive"]:hover,
+[fg="lightest-reactive"]:active{
+    color: var(--colors-lightest-reactive);
+}
+
+[bg="lightest-reactive"]{
+    background-color: var(--colors-lightest);
+}
+[bg="lightest-reactive"]:hover,
+[bg="lightest-reactive"]:active{
+    background-color: var(--colors-lightest-reactive);
+}
+
+[fg="light"]{
+    color: var(--colors-light);
+}
+[bg="light"]{
+    background-color: var(--colors-light);
+}
+
+[fg="light-reactive"]{
+    color: var(--colors-light);
+}
+[fg="light-reactive"]:hover,
+[fg="light-reactive"]:active{
+    color: var(--colors-light-reactive);
+}
+
+[bg="light-reactive"]{
+    background-color: var(--colors-light);
+}
+[bg="light-reactive"]:hover,
+[bg="light-reactive"]:active{
+    background-color: var(--colors-light-reactive);
+}

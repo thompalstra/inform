@@ -98,6 +98,7 @@ class xLayoutElement extends xBaseElement{
 
 class xContentElement extends xBaseElement{
     open( url, onsuccess, onerror ){
+        this.opening = true;
         if( typeof onsuccess !== 'function' ){
             onsuccess = function(){};
         }
@@ -111,6 +112,7 @@ class xContentElement extends xBaseElement{
                 setTimeout(function(e){
                     this.removeAttribute('data-showing');
                     this.setAttribute('data-show', '');
+                    this.opening = false;
                     onsuccess.call(this, event);
                 }.bind(this), 500);
             },

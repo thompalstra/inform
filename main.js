@@ -9,13 +9,20 @@ var windows = {
 };
 
 function init(){
+
+    process.env.GOOGLE_API_KEY = 'AIzaSyCWCBkyQ98EIiW0N506ySFahY8U12Jbfkk'
+
     windows.splash = createSplashWindow();
     windows.main = createMainWindow();
+    windows.main.on('closed', function(){
+        windows.main = null;
+        app.quit();
+    });
     windows.main.splash = windows.splash;
 }
 
 function createSplashWindow(){
-    return createWindow( '/app/views/splash.html',  { width: 400, height: 400, show: true } );
+    return createWindow( '/app/views/splash.html',  { frame: false, width: 400, height: 400, show: true } );
 }
 
 function createMainWindow(){
@@ -38,10 +45,14 @@ function createWindow ( _url, options, hasConsole ) {
     if( hasConsole ){
         win.webContents.openDevTools();
     }
-
-    win.on('closed', () => {
-        win = null
-    });
+    // win.on('closed', function(){
+    //     console.log('closed');
+    //     // console.log(this)
+    //     // this = null;
+    // }.bind(this));
+    // win.on('closed', () => {
+    //     this = null
+    // }.bind(win));
 
     return win;
 }
